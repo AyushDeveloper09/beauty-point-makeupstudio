@@ -5,9 +5,13 @@ import { Card, CardContent, Typography, Container, Button } from "@mui/material"
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(isSameOrAfter);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const Appointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -21,35 +25,27 @@ const Appointment = () => {
 
       console.log("🔥 Firestore Raw Data:", JSON.stringify(appointmentsData, null, 2));
 
-      if (appointmentsData.length > 0) {
-        console.log("📅 Sample Date from Firestore:", appointmentsData[0].date);
-      }
-
-      const now = dayjs(); // Current time
+      const now = dayjs().tz("Asia/Kolkata"); // Get system time in the correct timezone
 
       appointmentsData = appointmentsData.filter((appointment) => {
         if (!appointment.date || !appointment.time) return false;
 
-        // Standardize time format before parsing
+        // Ensure time is in 24-hour format
         const formattedTime = dayjs(appointment.time, ["hh:mm A", "h:mm A"]).format("HH:mm");
         const fullDateTimeString = `${appointment.date} ${formattedTime}`;
 
         console.log(`⏰ Parsed Time: ${formattedTime}`);
 
-        // Ensure correct date format for parsing
-        const appointmentDateTime = dayjs(fullDateTimeString, [
-          "DD/MM/YYYY HH:mm",
-          "MM/DD/YYYY HH:mm",
-          "DD/MM/YY HH:mm",
-        ]);
+        // Correctly set timezone for appointment date & time
+        const appointmentDateTime = dayjs.tz(fullDateTimeString, "DD/MM/YYYY HH:mm", "Asia/Kolkata");
 
         console.log(
           `🕒 Checking: ${fullDateTimeString} -> Parsed: ${appointmentDateTime.format(
             "DD/MM/YYYY HH:mm"
-          )} | Valid? ${appointmentDateTime.isValid()} | After Now? ${appointmentDateTime.isSameOrAfter(now)}`
+          )} | Valid? ${appointmentDateTime.isValid()} | Now: ${now.format("DD/MM/YYYY HH:mm")} | After Now? ${appointmentDateTime.isAfter(now)}`
         );
 
-        return appointmentDateTime.isValid() && appointmentDateTime.isSameOrAfter(now);
+        return appointmentDateTime.isValid() && appointmentDateTime.isAfter(now);
       });
 
       console.log("✅ Filtered Appointments:", appointmentsData);

@@ -39,7 +39,8 @@ const HomePage = () => {
           <div className="owner-content">
             {/* Owner Image */}
             <div className="owner-image">
-              <img src="/owner.jpg" alt="Shalini Kesarwani" />
+            <img src="/owner.jpg" alt="Shalini Kesarwani" />
+
             </div>
 
             {/* Owner Message */}
