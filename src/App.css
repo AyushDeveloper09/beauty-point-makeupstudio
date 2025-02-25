@@ -1,0 +1,286 @@
+/* General Styling */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+.header {
+  background: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Hero Section (Minimal & Elegant) */
+.hero-section {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 26px;
+  font-weight: 500;
+  font-style: italic;
+  color: #444;
+  background: #f8f8f8;
+}
+
+/* Buttons Section */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background: #222;
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #222;
+  border: 1px solid #222;
+}
+
+/* Owner Section */
+.owner-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+  margin-top: 40px;
+  background: #f9f9f9;
+}
+
+.owner-card {
+  display: flex;
+  width: 800px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  transition: 0.3s ease-in-out;
+}
+
+.owner-card:hover {
+  transform: scale(1.02);
+}
+
+.owner-content {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.owner-image img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px 0 0 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.owner-message {
+  padding: 20px;
+  text-align: left;
+}
+
+.owner-title {
+  color: #222;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.owner-text {
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.owner-name {
+  font-size: 16px;
+  font-style: italic;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* Footer */
+.footer {
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Appointment Section */
+
+/* Center the booking appointment section */
+.appointment-container {
+  display: flex;
+  flex-direction: column; /* Stack heading and card */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height */
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Studio Heading */
+.appointment-heading {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Appointment Card Layout */
+.appointment-card {
+  width: 400px;
+  padding: 30px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Form Layout */
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Fields */
+.appointment-form input,
+.appointment-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Submit Button */
+.appointment-form button {
+  background: #222;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.appointment-form button:hover {
+  background: #444;
+}
+
+/* Services Section */
+
+/* Services Page Styles */
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #f8f8f8;
+  text-align: center;
+}
+
+/* Beauty Point Makeup Studio Heading */
+.studio-heading {
+  font-size: 36px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Services Header */
+.services-header {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* Each Service Category Card */
+.service-category {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Elevate & Highlight on Hover */
+.service-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Category Title - Black Underline */
+.category-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  border-bottom: 3px solid black; /* Changed from gray to black */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Service List */
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual Service Item */
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Highlight service item on hover */
+.service-item:hover {
+  background: #ffe6e6;
+}
+
+/* Service Name */
+.service-name {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Service Price */
+.service-price {
+  font-weight: 600;
+  color: #222;
+}
