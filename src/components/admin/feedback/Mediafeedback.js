@@ -7,7 +7,7 @@ import { ExpandMore, ExpandLess, Delete, Close } from "@mui/icons-material";
 import { ref, uploadBytes, getDownloadURL, listAll, deleteObject } from "firebase/storage";
 import { storage } from "../../../firebaseConfig";
 
-const MAX_FILE_SIZE_MB = 30; // 🔥 File size limit
+const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30MB limit
 
 const MediaFeedback = () => {
   const [category, setCategory] = useState("");
@@ -16,56 +16,95 @@ const MediaFeedback = () => {
   const [expanded, setExpanded] = useState({});
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  // ✅ Handle File Upload with Size Restriction
-  const handleUpload = async () => {
-    if (!file || !category) return alert("❌ Please select a category and a file.");
-
-    if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-      return alert(`❌ File size exceeds ${MAX_FILE_SIZE_MB}MB! Please upload a smaller file.`);
+  // Handle file selection with file size and type check
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      if (selectedFile.size > MAX_FILE_SIZE) {
+        alert("❌ File size exceeds 30MB. Please upload a smaller file.");
+        return;
+      }
+      console.log("Selected file type:", selectedFile.type);
+      setFile(selectedFile);
     }
-
-    const fileRef = ref(storage, `media/${category}/${file.name}`);
-    await uploadBytes(fileRef, file);
-    const url = await getDownloadURL(fileRef);
-
-    setMedia((prev) => ({
-      ...prev,
-      [category]: [...prev[category], { url, name: file.name }]
-    }));
-    setFile(null);
-
-    alert("✅ Media uploaded successfully!");
   };
 
-  // ✅ Fetch Media from Firebase
-  useEffect(() => {
-    const fetchMedia = async () => {
+  // Upload file with metadata and store full file path for deletion
+  const handleUpload = async () => {
+    if (!file || !category) {
+      alert("❌ Please select a category and a file.");
+      return;
+    }
+
+    try {
+      console.log("Uploading file:", file.name, "to category:", category);
+      const filePath = `media/${category}/${Date.now()}_${file.name}`;
+      const fileRef = ref(storage, filePath);
+      
+      // Set metadata with the file's MIME type
+      const metadata = {
+        contentType: file.type,
+      };
+
+      await uploadBytes(fileRef, file, metadata);
+      console.log("Upload successful, fetching file URL...");
+      const url = await getDownloadURL(fileRef);
+      console.log("File URL:", url);
+
+      // Update media state using full filePath
+      setMedia((prev) => ({
+        ...prev,
+        [category]: [...prev[category], { url, filePath }],
+      }));
+
+      setFile(null);
+      alert("✅ Media uploaded successfully!");
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("❌ Upload failed. Check console for errors.");
+    }
+  };
+
+  // Fetch media for each category from Firebase Storage
+  const fetchMedia = async () => {
+    try {
       ["Bridal", "Side", "Others"].forEach(async (cat) => {
         const listRef = ref(storage, `media/${cat}`);
         const result = await listAll(listRef);
-        const urls = await Promise.all(
+        const files = await Promise.all(
           result.items.map(async (item) => {
             const url = await getDownloadURL(item);
-            return { url, name: item.name };
+            return { url, filePath: item.fullPath };
           })
         );
-        setMedia((prev) => ({ ...prev, [cat]: urls }));
+        setMedia((prev) => ({ ...prev, [cat]: files }));
       });
-    };
+    } catch (error) {
+      console.error("Error fetching media:", error);
+    }
+  };
+
+  useEffect(() => {
     fetchMedia();
   }, []);
 
-  // ✅ Handle File Deletion
-  const handleDelete = async (cat, fileName) => {
-    const fileRef = ref(storage, `media/${cat}/${fileName}`);
-    await deleteObject(fileRef);
-    setMedia((prev) => ({
-      ...prev,
-      [cat]: prev[cat].filter((file) => file.name !== fileName)
-    }));
+  // Delete file using its full file path
+  const handleDelete = async (cat, filePath) => {
+    try {
+      const fileRef = ref(storage, filePath);
+      await deleteObject(fileRef);
+      setMedia((prev) => ({
+        ...prev,
+        [cat]: prev[cat].filter((file) => file.filePath !== filePath)
+      }));
+      alert("🗑️ Media deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      alert("❌ Deletion failed. Check console.");
+    }
   };
 
-  // ✅ Toggle Collapse
+  // Toggle collapse for media categories
   const toggleExpand = (cat) => {
     setExpanded((prev) => ({ ...prev, [cat]: !prev[cat] }));
   };
@@ -76,7 +115,7 @@ const MediaFeedback = () => {
         📸 Media Management
       </Typography>
 
-      {/* ✅ Category Selection & Upload */}
+      {/* Category Selection & Upload */}
       <Box display="flex" justifyContent="center" alignItems="center" gap={2} mt={2}>
         <Select 
           value={category} 
@@ -94,7 +133,8 @@ const MediaFeedback = () => {
           type="file" 
           id="file-upload" 
           style={{ display: "none" }} 
-          onChange={(e) => setFile(e.target.files[0])} 
+          accept="image/*"
+          onChange={handleFileChange} 
         />
         <label htmlFor="file-upload">
           <Button variant="contained" color="primary" component="span">
@@ -112,7 +152,7 @@ const MediaFeedback = () => {
         </Button>
       </Box>
 
-      {/* ✅ Media Categories (Collapsible) */}
+      {/* Media Categories (Collapsible) */}
       {["Bridal", "Side", "Others"].map((cat) => (
         <Box key={cat} mt={3} width="100%" display="flex" flexDirection="column" alignItems="center">
           <Button 
@@ -148,23 +188,24 @@ const MediaFeedback = () => {
                       width: "100%", 
                       borderRadius: "10px", 
                       boxShadow: "0px 4px 8px rgba(0,0,0,0.1)", 
-                      cursor: "pointer"
+                      cursor: "pointer" 
                     }}
-                    onClick={() => setSelectedMedia(file.url)}
                   >
-                    {file.url.includes(".mp4") ? (
-                      <video src={file.url} width="120" height="80" controls />
-                    ) : (
-                      <CardMedia 
-                        component="img" 
-                        image={file.url} 
-                        alt="Media" 
-                        sx={{ width: "120px", height: "80px", borderRadius: "5px" }}
-                      />
-                    )}
-
+                    <CardMedia 
+                      component="img" 
+                      image={file.url} 
+                      alt="Media" 
+                      sx={{ width: "120px", height: "80px", borderRadius: "5px", cursor: "pointer" }} 
+                      onClick={() => setSelectedMedia(file.url)}
+                    />
                     <CardContent sx={{ flex: 1, textAlign: "right", paddingRight: "10px" }}>
-                      <IconButton onClick={(e) => { e.stopPropagation(); handleDelete(cat, file.name); }} color="error">
+                      <IconButton 
+                        onClick={(e) => { 
+                          e.stopPropagation(); 
+                          handleDelete(cat, file.filePath); 
+                        }} 
+                        color="error"
+                      >
                         <Delete />
                       </IconButton>
                     </CardContent>
@@ -176,19 +217,18 @@ const MediaFeedback = () => {
         </Box>
       ))}
 
-      {/* ✅ Full-Screen Media Viewer */}
-      <Dialog open={Boolean(selectedMedia)} onClose={() => setSelectedMedia(null)} maxWidth="md">
-        <IconButton 
-          onClick={() => setSelectedMedia(null)} 
-          sx={{ position: "absolute", right: 10, top: 10, color: "white" }}
-        >
-          <Close />
-        </IconButton>
-        {selectedMedia?.includes(".mp4") ? (
-          <video src={selectedMedia} width="100%" controls autoPlay />
-        ) : (
-          <img src={selectedMedia} alt="Preview" style={{ width: "100%" }} />
-        )}
+      {/* Full-Screen Media Preview */}
+      <Dialog open={!!selectedMedia} onClose={() => setSelectedMedia(null)}>
+        <Box sx={{ padding: "20px", position: "relative" }}>
+          <IconButton onClick={() => setSelectedMedia(null)} sx={{ position: "absolute", top: 10, right: 10 }}>
+            <Close />
+          </IconButton>
+          <img 
+            src={selectedMedia} 
+            alt="Preview" 
+            style={{ width: "100%", maxHeight: "90vh", objectFit: "contain" }} 
+          />
+        </Box>
       </Dialog>
     </Container>
   );
