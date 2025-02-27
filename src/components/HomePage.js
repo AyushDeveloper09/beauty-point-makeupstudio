@@ -10,7 +10,7 @@ const HomePage = () => {
         <h1>Beauty Point Makeup Studio</h1>
       </header>
 
-      {/* Hero Section (Refined & Elegant) */}
+      {/* Hero Section */}
       <section className="hero-section">
         <h2>“Where Beauty and Confidence Meet”</h2>
       </section>
@@ -39,17 +39,24 @@ const HomePage = () => {
           <div className="owner-content">
             {/* Owner Image */}
             <div className="owner-image">
-            <img src="/owner.jpg" alt="Shalini Kesarwani" />
-
+              <img 
+                src={`${process.env.PUBLIC_URL}/assets/owner.png`} 
+                alt="Shalini Kesarwani" 
+              />
             </div>
 
             {/* Owner Message */}
             <CardContent className="owner-message">
-              <Typography variant="h5" className="owner-title">A Message from Our Founder</Typography>
-              <Typography variant="body1" className="owner-text">
-                "At Beauty Point Makeup Studio, we believe every individual is naturally beautiful. Our mission is to enhance your unique charm with precision, elegance, and passion."
+              <Typography variant="h5" className="owner-title">
+                A Message from Our Founder
               </Typography>
-              <Typography variant="body2" className="owner-name">- Shalini Kesarwani</Typography>
+              <Typography variant="body1" className="owner-text">
+                "At Beauty Point Makeup Studio, we believe every individual is naturally beautiful. 
+                Our mission is to enhance your unique charm with precision, elegance, and passion."
+              </Typography>
+              <Typography variant="body2" className="owner-name">
+                - Shalini Kesarwani
+              </Typography>
             </CardContent>
           </div>
         </Card>
