@@ -1,0 +1,241 @@
+
+@import url("welcome.css");
+
+@import url("owner.css");
+@import url("herosection.css");
+
+
+/* Header Styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 8%;
+  background-color: white;
+  border-bottom: 2px solid #ddd; /* Added gray border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.brand-logo img {
+  height: 80px; /* Increased logo size */
+  width: auto; /* Maintain aspect ratio */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+  color: #25D366; /* WhatsApp Green */
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.login-btn, .signup-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.signup-btn {
+  background-color: #25D366; /* WhatsApp Green */
+}
+
+/* Hover Effect on Auth Buttons */
+.login-btn:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+.signup-btn:hover {
+  background-color: #1da851;
+  transform: scale(1.05);
+}
+
+
+
+/* Footer */
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+/* Appointment Section */
+
+/* Center the booking appointment section */
+.appointment-container {
+  display: flex;
+  flex-direction: column; /* Stack heading and card */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full height */
+  background-color: #f8f8f8;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Studio Heading */
+.appointment-heading {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Appointment Card Layout */
+.appointment-card {
+  width: 400px;
+  padding: 30px;
+  background: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* Form Layout */
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input Fields */
+.appointment-form input,
+.appointment-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* Submit Button */
+.appointment-form button {
+  background: #222;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.appointment-form button:hover {
+  background: #444;
+}
+
+/* Services Page Styles */
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #f8f8f8;
+  text-align: center;
+}
+
+/* Beauty Point Makeup Studio Heading */
+.studio-heading {
+  font-size: 36px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+/* Services Header */
+.services-header {
+  font-size: 28px;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 40px;
+}
+
+/* Each Service Category Card */
+.service-category {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Elevate & Highlight on Hover */
+.service-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Category Title - Black Underline */
+.category-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #222;
+  border-bottom: 3px solid black; /* Changed from gray to black */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Service List */
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual Service Item */
+.service-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Highlight service item on hover */
+.service-item:hover {
+  background: #ffe6e6;
+}
+
+/* Service Name */
+.service-name {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Service Price */
+.service-price {
+  font-weight: 600;
+  color: #222;
+}
+
+
+
+
+
+
+

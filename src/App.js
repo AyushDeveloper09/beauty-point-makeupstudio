@@ -1,4 +1,4 @@
-import "./App.css";
+
 import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import WelcomeScreen from "./components/WelcomeScreen";

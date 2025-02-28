@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css"; // Ensure CSS is imported
+
 
 const services = [
   {
