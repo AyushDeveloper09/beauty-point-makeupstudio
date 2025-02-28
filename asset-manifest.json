@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/beauty-point-makeupstudio/static/css/main.d0c7d37f.css",
+    "main.js": "/beauty-point-makeupstudio/static/js/main.f39e1d51.js",
+    "index.html": "/beauty-point-makeupstudio/index.html",
+    "main.d0c7d37f.css.map": "/beauty-point-makeupstudio/static/css/main.d0c7d37f.css.map",
+    "main.f39e1d51.js.map": "/beauty-point-makeupstudio/static/js/main.f39e1d51.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d0c7d37f.css",
+    "static/js/main.f39e1d51.js"
+  ]
+}
