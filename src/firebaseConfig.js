@@ -5,7 +5,7 @@ import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBVaquJlWGNxuQtZkvKGQKyY7AbLZWOP74", // ✅ Corrected key
+  apiKey: process.env.REACT_APP_API_KEY, // Fixed environment variable access
   authDomain: "beautypoint-d0a65.firebaseapp.com",
   projectId: "beautypoint-d0a65",
   storageBucket: "beautypoint-d0a65.appspot.com",
@@ -14,10 +14,10 @@ const firebaseConfig = {
   measurementId: "G-ZHLDDT9ZR4"
 };
 
-// ✅ Initialize Firebase app
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 
-// ✅ Export services
+// Export services
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
