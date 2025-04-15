@@ -233,9 +233,25 @@
   color: #222;
 }
 
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background: linear-gradient(120deg, #000, #1c1c1c);
+}
 
+.auth-card {
+  padding: 2rem;
+  max-width: 400px;
+  width: 100%;
+  background: #fff8f0;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
 
-
-
-
-
+.title {
+  color: #c89b3c;
+  text-align: center;
+  margin-bottom: 1rem;
+}

@@ -1,20 +1,25 @@
+// src/firebaseConfig.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage"; // ✅ Import Firebase Storage
+import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBVaquJlWGNxuQtZkvKGQkY7AbLZW0P74",
+  apiKey: "AIzaSyBVaquJlWGNxuQtZkvKGQKyY7AbLZWOP74", // ✅ Corrected key
   authDomain: "beautypoint-d0a65.firebaseapp.com",
   projectId: "beautypoint-d0a65",
-  storageBucket: "beautypoint-d0a65.firebasestorage.app", // Updated bucket name
+  storageBucket: "beautypoint-d0a65.appspot.com",
   messagingSenderId: "1071482451592",
   appId: "1:1071482451592:web:3c92e1bac6077c4b85513d",
   measurementId: "G-ZHLDDT9ZR4"
 };
 
-// ✅ Initialize Firebase
+// ✅ Initialize Firebase app
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage(app); // ✅ Initialize Firebase Storage
 
-export { db, storage };
+// ✅ Export services
+const db = getFirestore(app);
+const storage = getStorage(app);
+const auth = getAuth(app);
+
+export { db, storage, auth };

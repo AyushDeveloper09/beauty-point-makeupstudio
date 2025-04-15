@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import WelcomeScreen from "./components/WelcomeScreen";
@@ -9,7 +8,11 @@ import Admin from "./components/admin/Admin";
 import Appointment from "./components/admin/appointment"; 
 import Billing from "./components/admin/Billing";
 
-// ✅ Import Feedback Pages
+// ✅ Auth Pages (new path)
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
+
+// ✅ Feedback Pages
 import Feedback from "./components/admin/feedback/Feedback"; 
 import MediaFeedback from "./components/admin/feedback/Mediafeedback";
 import TextFeedback from "./components/admin/feedback/Textfeedback";
@@ -39,6 +42,10 @@ const App = () => {
           <Route path="/admin/feedback/media" element={<MediaFeedback />} />
           <Route path="/admin/feedback/text" element={<TextFeedback />} />
           <Route path="/admin/feedback/testimonials" element={<TestimonialsFeedback />} />
+
+          {/* ✅ Authentication */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
 
           {/* ✅ Redirect any unknown routes to Home */}
           <Route path="*" element={<Navigate to="/" />} />
