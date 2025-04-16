@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Container, Typography, Card, CardContent, Button, Collapse, 
-  IconButton, List, ListItem, ListItemText, Box 
-} from "@mui/material";
+import { Container, Typography, Card, CardContent, Button, Collapse, 
+         IconButton, List, ListItem, ListItemText, Box } from "@mui/material";
 import { ExpandMore, ExpandLess, Delete, Check, Close } from "@mui/icons-material";
-import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
 
 const TestimonialsFeedback = () => {
@@ -15,23 +13,33 @@ const TestimonialsFeedback = () => {
   // ✅ Fetch Testimonials from Firestore
   useEffect(() => {
     const fetchTestimonials = async () => {
-      const pendingSnap = await getDocs(collection(db, "pendingTestimonials"));
-      const approvedSnap = await getDocs(collection(db, "approvedTestimonials"));
+      const snapshot = await getDocs(collection(db, "textTestimonials"));
 
-      setPendingTestimonials(pendingSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      setApprovedTestimonials(approvedSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      // Separate pending and approved testimonials based on 'approved' field
+      const pending = [];
+      const approved = [];
+
+      snapshot.docs.forEach(doc => {
+        const testimonial = { id: doc.id, ...doc.data() };
+        if (testimonial.approved) {
+          approved.push(testimonial);
+        } else {
+          pending.push(testimonial);
+        }
+      });
+
+      setPendingTestimonials(pending);
+      setApprovedTestimonials(approved);
     };
     fetchTestimonials();
   }, []);
 
   // ✅ Approve Testimonial
   const handleApprove = async (testimonial) => {
-    await addDoc(collection(db, "approvedTestimonials"), {
-      customerName: testimonial.customerName,
-      feedback: testimonial.feedback,
+    await updateDoc(doc(db, "textTestimonials", testimonial.id), {
+      approved: true, // Update approved status to true
     });
-    await deleteDoc(doc(db, "pendingTestimonials", testimonial.id));
-    
+
     setPendingTestimonials(pendingTestimonials.filter((item) => item.id !== testimonial.id));
     setApprovedTestimonials([...approvedTestimonials, testimonial]);
 
@@ -40,14 +48,14 @@ const TestimonialsFeedback = () => {
 
   // ✅ Reject Testimonial
   const handleReject = async (id) => {
-    await deleteDoc(doc(db, "pendingTestimonials", id));
+    await deleteDoc(doc(db, "textTestimonials", id));
     setPendingTestimonials(pendingTestimonials.filter((item) => item.id !== id));
     alert("❌ Testimonial rejected!");
   };
 
   // ✅ Delete Approved Testimonial
   const handleDelete = async (id) => {
-    await deleteDoc(doc(db, "approvedTestimonials", id));
+    await deleteDoc(doc(db, "textTestimonials", id));
     setApprovedTestimonials(approvedTestimonials.filter((item) => item.id !== id));
     alert("🗑️ Testimonial deleted!");
   };

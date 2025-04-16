@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style/App.css"; // CSS is already handled here
+import "./style/App.css";
+
 import SpecialOffers from "./SpecialOffers";
-
-
+import TestimonialSection from "../components/TestimonialSection";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -18,7 +18,9 @@ const HomePage = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play().catch(error => console.log("Autoplay with sound blocked:", error));
+      videoRef.current.play().catch(error =>
+        console.log("Autoplay with sound blocked:", error)
+      );
     }
   }, []);
 
@@ -27,7 +29,10 @@ const HomePage = () => {
       {/* Header */}
       <header className="header">
         <div className="brand-logo">
-          <img src={`${process.env.PUBLIC_URL}/assets/brandlogo.png`} alt="Brand Logo" />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/brandlogo.png`}
+            alt="Brand Logo"
+          />
         </div>
 
         <nav className="nav-links">
@@ -37,8 +42,12 @@ const HomePage = () => {
         </nav>
 
         <div className="auth-buttons">
-          <button className="login-btn" onClick={() => navigate('/login')}>Login</button>
-          <button className="signup-btn" onClick={() => navigate('/signup')}>Sign Up</button>
+          <button className="login-btn" onClick={() => navigate("/login")}>
+            Login
+          </button>
+          <button className="signup-btn" onClick={() => navigate("/signup")}>
+            Sign Up
+          </button>
         </div>
       </header>
 
@@ -51,20 +60,32 @@ const HomePage = () => {
             celebrate your beauty, and ensure that every special moment is picture-perfect.
           </p>
           <div className="hero-buttons">
-            <button className="whatsapp-btn" onClick={() => window.open('https://wa.me/6390600533', '_blank')}>
+            <button
+              className="whatsapp-btn"
+              onClick={() => window.open("https://wa.me/6390600533", "_blank", "noopener noreferrer")}
+            >
               Chat with Us
             </button>
-            <button className="secondary-btn" onClick={() => navigate('/services')}>
+            <button
+              className="secondary-btn"
+              onClick={() => navigate("/services")}
+            >
               Explore Services
             </button>
-            <button className="primary-btn" onClick={() => navigate('/book-appointment')}>
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/book-appointment")}
+            >
               Book Appointment
             </button>
           </div>
         </div>
 
         <div className="hero-image">
-          <img src={`${process.env.PUBLIC_URL}/assets/hero.png`} alt="Makeup Studio" />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/hero.png`}
+            alt="Makeup Studio"
+          />
         </div>
       </div>
 
@@ -73,36 +94,46 @@ const HomePage = () => {
         <video
           ref={videoRef}
           autoPlay
+          muted
           controls
           playsInline
           className="hero-video"
           onEnded={() => console.log("Video ended")}
         >
-          <source src={`${process.env.PUBLIC_URL}/assets/0228.mp4`} type="video/mp4" />
+          <source
+            src={`${process.env.PUBLIC_URL}/assets/0228.mp4`}
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
       </div>
 
       {/* Special Offers Section */}
-        <SpecialOffers />
+      <SpecialOffers />
 
+      {/* Testimonial Section */}
+      <TestimonialSection />
 
       {/* Owner Section */}
       <div className="owner-section">
         <div className="owner-card">
-          <img src={`${process.env.PUBLIC_URL}/assets/owner.png`} alt="Owner" className="owner-image" />
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/owner.png`}
+            alt="Owner"
+            className="owner-image"
+          />
           <div className="owner-text">
             <h2>Shalini Kesarwani (Our Founder)</h2>
             <p>
-              Our founder, a passionate and skilled makeup artist, believes in 
+              Our founder, a passionate and skilled makeup artist, believes in
               bringing out the best in every individual. With years of experience, 
-              they ensure that each client leaves feeling confident and beautiful.
+              she ensures that each client leaves feeling confident and beautiful.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Footer Section */}
+      {/* Footer */}
       <footer className="footer">
         <p>© 2025 Beauty Point Makeup Studio. All rights reserved.</p>
       </footer>

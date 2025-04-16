@@ -9,7 +9,7 @@ import Admin from "./components/admin/Admin";
 import Appointment from "./components/admin/appointment"; 
 import Billing from "./components/admin/Billing";
 
-// ✅ Auth Pages (new path)
+// ✅ Auth Pages
 import Login from "./auth/Login";
 import Signup from "./auth/Signup";
 
@@ -18,6 +18,9 @@ import Feedback from "./components/admin/feedback/Feedback";
 import MediaFeedback from "./components/admin/feedback/Mediafeedback";
 import TextFeedback from "./components/admin/feedback/Textfeedback";
 import TestimonialsFeedback from "./components/admin/feedback/Testimonialfeedback";
+
+// ✅ Testimonial Submission Page
+import SubmitTestimonial from "./components/SubmitTestimonial";
 
 const App = () => {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -43,6 +46,9 @@ const App = () => {
           <Route path="/admin/feedback/media" element={<MediaFeedback />} />
           <Route path="/admin/feedback/text" element={<TextFeedback />} />
           <Route path="/admin/feedback/testimonials" element={<TestimonialsFeedback />} />
+
+          {/* ✅ Testimonial Submission Page */}
+          <Route path="/submit-testimonial" element={<SubmitTestimonial />} />
 
           {/* ✅ Authentication */}
           <Route path="/login" element={<Login />} />
