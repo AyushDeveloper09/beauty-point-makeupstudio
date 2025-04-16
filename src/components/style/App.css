@@ -147,6 +147,9 @@
   background: #444;
 }
 
+
+/* Services Page Styles */
+
 /* Services Page Styles */
 .services-container {
   max-width: 1200px;
@@ -254,4 +257,117 @@
   color: #c89b3c;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.special-offers {
+  padding: 60px 20px;
+  background: #fdfdfd;
+  position: relative;
+}
+
+.special-offers-title {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Custom navigation buttons */
+.offers-navigation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.nav-arrow {
+  background-color: transparent;
+  border: 2px solid #e91e63;
+  color: #e91e63;
+  font-size: 24px;
+  padding: 8px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background-color: #e91e63;
+  color: white;
+}
+
+.offers-swiper {
+  padding-bottom: 40px;
+}
+
+/* === Card Design === */
+.offer-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  min-height: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all 0.4s ease;
+}
+
+.offer-card:hover {
+  background-color: #ffe6f0;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Title & Price Layout */
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.offer-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.price-badge {
+  background: #e91e63;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Service List */
+.offer-services {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.offer-services li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #444;
+  position: relative;
+  padding-left: 20px;
+}
+
+.offer-services li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+  font-size: 0.9rem;
 }

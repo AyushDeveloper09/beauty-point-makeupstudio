@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./style/App.css"; // Correct CSS import
+import "./style/App.css"; // CSS is already handled here
+import SpecialOffers from "./SpecialOffers";
+
+
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -14,7 +17,6 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    // Ensure video plays with sound
     if (videoRef.current) {
       videoRef.current.play().catch(error => console.log("Autoplay with sound blocked:", error));
     }
@@ -66,7 +68,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Hero Video Section (Autoplay with Sound & Stops at End) */}
+      {/* Hero Video Section */}
       <div className={`hero-video-container ${fadeIn ? "fade-in" : ""}`}>
         <video
           ref={videoRef}
@@ -80,6 +82,10 @@ const HomePage = () => {
           Your browser does not support the video tag.
         </video>
       </div>
+
+      {/* Special Offers Section */}
+        <SpecialOffers />
+
 
       {/* Owner Section */}
       <div className="owner-section">
