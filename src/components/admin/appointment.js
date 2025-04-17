@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
-import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore";
-import { Card, CardContent, Typography, Container, Button } from "@mui/material";
+import {
+  collection,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Container,
+  Button,
+} from "@mui/material";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import sendConfirmationEmail from "./sendConfirmationEmail";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(isSameOrAfter);
@@ -23,33 +36,19 @@ const Appointment = () => {
         ...doc.data(),
       }));
 
-      console.log("🔥 Firestore Raw Data:", JSON.stringify(appointmentsData, null, 2));
-
-      const now = dayjs().tz("Asia/Kolkata"); // Get system time in the correct timezone
+      const now = dayjs().tz("Asia/Kolkata");
 
       appointmentsData = appointmentsData.filter((appointment) => {
         if (!appointment.date || !appointment.time) return false;
 
-        // Ensure time is in 24-hour format
         const formattedTime = dayjs(appointment.time, ["hh:mm A", "h:mm A"]).format("HH:mm");
         const fullDateTimeString = `${appointment.date} ${formattedTime}`;
-
-        console.log(`⏰ Parsed Time: ${formattedTime}`);
-
-        // Correctly set timezone for appointment date & time
         const appointmentDateTime = dayjs.tz(fullDateTimeString, "DD/MM/YYYY HH:mm", "Asia/Kolkata");
-
-        console.log(
-          `🕒 Checking: ${fullDateTimeString} -> Parsed: ${appointmentDateTime.format(
-            "DD/MM/YYYY HH:mm"
-          )} | Valid? ${appointmentDateTime.isValid()} | Now: ${now.format("DD/MM/YYYY HH:mm")} | After Now? ${appointmentDateTime.isAfter(now)}`
-        );
 
         return appointmentDateTime.isValid() && appointmentDateTime.isAfter(now);
       });
 
-      console.log("✅ Filtered Appointments:", appointmentsData);
-      setAppointments([...appointmentsData]); // Ensure React updates state
+      setAppointments([...appointmentsData]);
     });
 
     return () => unsubscribe();
@@ -66,6 +65,34 @@ const Appointment = () => {
     }
   };
 
+  const handleConfirm = async (appointment) => {
+    if (appointment.emailid) {
+      try {
+        await sendConfirmationEmail(
+          appointment.customerName,
+          appointment.emailid,
+          appointment.services,
+          appointment.date,
+          appointment.time
+        );
+        console.log("✅ Email sent successfully");
+
+        // 🔄 Persist confirmation in Firestore
+        await updateDoc(doc(db, "appointments", appointment.id), {
+          status: "confirmed",
+        });
+
+        // ✅ Show success alert
+        alert("✅ Mail sent!");
+      } catch (error) {
+        console.error("❌ Email sending failed:", error);
+        alert("Failed to send confirmation email.");
+      }
+    } else {
+      console.warn("⚠️ No email provided, skipping email sending.");
+    }
+  };
+
   return (
     <Container>
       <h2>📅 Booked Appointments</h2>
@@ -73,21 +100,41 @@ const Appointment = () => {
         <p>No upcoming appointments.</p>
       ) : (
         appointments.map((appointment) => (
-          <Card key={appointment.id} className="appointment-card" style={{ marginBottom: "10px", padding: "10px" }}>
+          <Card
+            key={appointment.id}
+            className="appointment-card"
+            style={{ marginBottom: "10px", padding: "10px" }}
+          >
             <CardContent>
               <Typography variant="h6">👤 {appointment.customerName}</Typography>
               <Typography>📅 Date: {appointment.date}</Typography>
               <Typography>⏰ Time: {appointment.time}</Typography>
               <Typography>💇‍♀️ Service: {appointment.services}</Typography>
               <Typography>📞 Contact: {appointment.customerPhone}</Typography>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleDelete(appointment.id)}
-                style={{ marginTop: "10px" }}
-              >
-                Cancel Appointment
-              </Button>
+              {appointment.emailid ? (
+                <Typography>📧 Email: {appointment.emailid}</Typography>
+              ) : (
+                <Typography color="error">⚠️ No email provided</Typography>
+              )}
+
+              <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleDelete(appointment.id)}
+                >
+                  Cancel Appointment
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => handleConfirm(appointment)}
+                  disabled={appointment.status === "confirmed"}
+                >
+                  {appointment.status === "confirmed" ? "✅ Confirmed" : "Confirm"}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ))

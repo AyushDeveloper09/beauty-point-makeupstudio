@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://AyushDeveloper09.github.io/beauty-point-makeupstudio",
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.5",
@@ -11,6 +12,7 @@
     "@mui/material": "^6.4.5",
     "@mui/x-date-pickers": "^7.27.0",
     "dayjs": "^1.11.13",
+    "emailjs-com": "^3.2.0",
     "firebase": "^11.3.1",
     "framer-motion": "^10.18.0",
     "react": "^18.0.0",

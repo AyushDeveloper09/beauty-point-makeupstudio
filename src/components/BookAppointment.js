@@ -34,32 +34,45 @@ const timeSlots = [
 
 const BookAppointment = () => {
   const [appointment, setAppointment] = useState({
-    date: dayjs(),  // Ensure it's in DD/MM/YYYY format
+    date: dayjs(),
     time: "",
     customerName: "",
     customerPhone: "",
     services: "",
+    emailid: "", // ✅ Use lowercase consistently
   });
 
   const handleChange = (field, value) => {
     setAppointment((prev) => ({ ...prev, [field]: value }));
   };
 
+  const isValidEmail = (email) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!appointment.date || !appointment.time || !appointment.customerName || !appointment.services) {
+    const { date, time, customerName, customerPhone, services, emailid } = appointment;
+
+    if (!date || !time || !customerName || !services || !customerPhone || !emailid) {
       alert("Please fill in all required fields.");
+      return;
+    }
+
+    if (!isValidEmail(emailid)) {
+      alert("Please enter a valid email address.");
       return;
     }
 
     try {
       await addDoc(collection(db, "appointments"), {
-        date: appointment.date.format("DD/MM/YYYY"), // 🔥 Save date in correct format
-        time: dayjs(appointment.time, "hh:mm A").format("hh:mm A"), // Ensure correct time format
-        customerName: appointment.customerName,
-        customerPhone: appointment.customerPhone,
-        services: appointment.services,
+        date: date.format("DD/MM/YYYY"),
+        time: dayjs(time, "hh:mm A").format("hh:mm A"),
+        customerName,
+        customerPhone,
+        services,
+        emailid, // ✅ Match Firestore format
+        status: "pending",
       });
 
       alert("Appointment booked successfully!");
@@ -70,6 +83,7 @@ const BookAppointment = () => {
         customerName: "",
         customerPhone: "",
         services: "",
+        emailid: "",
       });
     } catch (error) {
       console.error("❌ Error adding document:", error);
@@ -88,7 +102,7 @@ const BookAppointment = () => {
             <form onSubmit={handleSubmit} className="appointment-form">
               <DesktopDatePicker
                 label="Select Date"
-                format="DD/MM/YYYY" // 🔥 Ensure the picker also uses DD/MM/YYYY
+                format="DD/MM/YYYY"
                 value={appointment.date}
                 onChange={(newDate) => handleChange("date", dayjs(newDate))}
                 renderInput={(params) => <TextField {...params} fullWidth required />}
@@ -113,9 +127,20 @@ const BookAppointment = () => {
                 onChange={(e) => handleChange("customerPhone", e.target.value)}
               />
 
+              <TextField
+                label="Email ID"
+                fullWidth
+                required
+                type="email"
+                value={appointment.emailid}
+                onChange={(e) => handleChange("emailid", e.target.value)}
+              />
+
               <Autocomplete
                 options={servicesList}
-                renderInput={(params) => <TextField {...params} label="Service Required" fullWidth required />}
+                renderInput={(params) => (
+                  <TextField {...params} label="Service Required" fullWidth required />
+                )}
                 value={appointment.services}
                 onChange={(event, newValue) => handleChange("services", newValue)}
               />
