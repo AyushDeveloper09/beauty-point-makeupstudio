@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/beauty-point-makeupstudio/static/css/main.b6fd7b20.css",
-    "main.js": "/beauty-point-makeupstudio/static/js/main.90de5e02.js",
+    "main.js": "/beauty-point-makeupstudio/static/js/main.fd22a921.js",
     "index.html": "/beauty-point-makeupstudio/index.html",
     "main.b6fd7b20.css.map": "/beauty-point-makeupstudio/static/css/main.b6fd7b20.css.map",
-    "main.90de5e02.js.map": "/beauty-point-makeupstudio/static/js/main.90de5e02.js.map"
+    "main.fd22a921.js.map": "/beauty-point-makeupstudio/static/js/main.fd22a921.js.map"
   },
   "entrypoints": [
     "static/css/main.b6fd7b20.css",
-    "static/js/main.90de5e02.js"
+    "static/js/main.fd22a921.js"
   ]
 }
