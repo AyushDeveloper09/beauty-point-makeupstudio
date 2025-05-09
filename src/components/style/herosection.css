@@ -1,53 +1,53 @@
-/* Hero Section */
+/* === Hero Section === */
 .hero-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 50vh; /* Keeping the reduced height */
+  height: 50vh;
   padding: 40px 8%;
-  background-color: #fff;
-  gap: 20px; /* Reduce the gap between text and image */
+  background-color: #f5f7fa; /* Light gray background similar to Vikas site */
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-/* Left Side Text */
 .hero-text {
   flex: 1;
-  max-width: 50%; /* Allow text to take a bit more space */
-  margin-right: 10px; /* Reduce space between text and image */
+  max-width: 50%;
+  margin-right: 10px;
 }
 
 .business-name {
-  font-size: 60px;
+  font-size: 68px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #000;
+  color: #333;
 }
 
 .hero-tagline {
   font-size: 17px;
-  color: #555;
+  color: #666;
   margin-bottom: 20px;
-  max-width: 450px; /* Adjust for better fit */
+  max-width: 450px;
 }
 
 /* Buttons */
 .hero-buttons {
   display: flex;
   gap: 15px;
+  margin-top: 25px;
 }
 
 .whatsapp-btn,
 .secondary-btn,
 .primary-btn {
-  padding: 12px 20px;
+  padding: 12px 24px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 30px; /* Rounded like Vikas */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Individual Button Styles */
 .whatsapp-btn {
   background-color: #25D366;
   color: white;
@@ -56,84 +56,71 @@
 
 .secondary-btn {
   background-color: transparent;
-  color: black;
-  border: 2px solid black;
+  border: 2px solid #000;
+  color: #000;
 }
 
 .primary-btn {
-  background-color: black;
+  background-color: #000; /* Changed to black */
   color: white;
   border: none;
 }
 
-/* Hover Effects */
-button:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
 .whatsapp-btn:hover {
   background-color: #1da851;
+  transform: translateY(-2px);
 }
 
 .secondary-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #000;
+  transform: translateY(-2px);
 }
 
 .primary-btn:hover {
   background-color: #333;
+  transform: translateY(-2px);
 }
 
-/* Right Side Image */
-
+/* === Right Side Image === */
 .hero-image {
-  flex: 1.5; /* Keeps the image space */
+  flex: 1.5;
   display: flex;
-  justify-content: flex-start; /* Moves the image towards the left */
+  justify-content: flex-start;
   align-items: center;
-  padding-left: 20px; /* Adjust left padding to fine-tune positioning */
+  padding-left: 20px;
+  margin-top: 20px;
 }
 
 .hero-image img {
   width: 100%;
-  max-width: 620px; /* Adjust size if needed */
+  max-width: 620px;
   height: auto;
   border-radius: 10px;
 }
-/* Hero Video Container */
+
+/* === Hero Video Section === */
 .hero-video-container {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 40px 0;
   opacity: 0;
-  animation: fadeIn 1.6s ease-in-out forwards 0.7s; /* Delayed fade-in */
+  animation: fadeIn 1.6s ease-in-out forwards 0.7s;
 }
 
-/* Video Styling */
-/* Hero Video Container */
-.hero-video-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  opacity: 0;
-  animation: fadeIn 1.6s ease-in-out forwards 0.7s; /* Delayed fade-in */
-}
-
-/* Video Styling */
 .hero-video {
-  width: 80%; /* Standard width */
-  max-width: 900px; /* Keep it limited for balance */
-  height: 450px; /* Standard height */
-  object-fit: cover; /* Keeps video aspect ratio intact */
-  border-radius: 10px; /* Soft rounded corners */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 85%; /* Increased width for desktop */
+  max-height: 400px; /* Larger height for desktop */
+  height: auto;
+  margin: 10px auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: block;
-  margin: 20px auto; /* Centers the video */
 }
-/* Fade-in Animation */
+
+/* === Fade-in Animation === */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -142,5 +129,59 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* === Media Query Adjustments for Mobile === */
+@media (max-width: 767px) {
+  .hero-section {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .business-name {
+    font-size: 58px;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .hero-tagline {
+    font-size: 14px;
+    margin: 10px 0 20px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .whatsapp-btn,
+  .secondary-btn,
+  .primary-btn {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+    border-radius: 30px;
+  }
+
+  .hero-image {
+    display: none; /* Hide the hero graphic image */
+  }
+
+  .hero-video-container {
+    opacity: 1; /* Ensures video section is visible */
+    margin: 20px 0;
+  }
+  
+  .hero-video {
+    width: 95%;
+    max-height: 240px;
   }
 }

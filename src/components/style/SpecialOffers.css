@@ -1,0 +1,186 @@
+/* Special Offers Component Styles */
+.special-offers {
+  padding: 60px 20px;
+  background: #fff;
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.special-offers-title {
+  font-size: 2.2rem;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Navigation buttons */
+.offers-navigation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.nav-arrow {
+  background-color: transparent;
+  border: 2px solid #000;
+  color: #000;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-arrow:hover {
+  background-color: #000;
+  color: white;
+}
+
+.offers-swiper {
+  padding-bottom: 50px; /* Space for pagination dots */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Design - Fixed equal heights */
+.offer-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  height: 350px; /* Fixed height */
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  margin: 10px auto;
+  max-width: 320px;
+  width: 100%;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+/* Content Area */
+.offer-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+
+/* Header - Title and Price */
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.offer-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+}
+
+.price-badge {
+  background: #000;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Services List */
+.offer-services {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 auto 0;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.offer-services li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #444;
+  position: relative;
+  padding-left: 5px;
+}
+
+/* Book Now Button */
+.book-now-btn {
+  background-color: #000;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.book-now-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+/* Swiper Pagination Dots */
+.swiper-pagination-bullet {
+  background-color: #000;
+  opacity: 0.5;
+  width: 10px;
+  height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #000;
+  width: 12px;
+  height: 12px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .special-offers {
+    padding: 40px 15px;
+  }
+
+  .special-offers-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+  }
+
+  .offer-card {
+    height: 330px;
+    max-width: 280px;
+    padding: 20px;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}

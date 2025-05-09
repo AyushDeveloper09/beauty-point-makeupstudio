@@ -22,7 +22,7 @@ dayjs.extend(customParseFormat);
 
 const servicesList = [
   "Bridal Makeup", "Party Makeup", "Threading", "Haircut", "Facial", "Waxing",
-  "Hair Spa", "Hair Coloring", "Body Polishing", "Manicure", "Pedicure"
+  "Hair Spa", "Hair Coloring", "Body Polishing", "Manicure", "Pedicure" , "Special Offer"
 ];
 
 const timeSlots = [

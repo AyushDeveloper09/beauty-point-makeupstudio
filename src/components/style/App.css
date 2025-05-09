@@ -1,9 +1,6 @@
-
 @import url("welcome.css");
-
 @import url("owner.css");
 @import url("herosection.css");
-
 
 /* Header Styles */
 .header {
@@ -12,67 +9,141 @@
   justify-content: space-between;
   padding: 15px 8%;
   background-color: white;
-  border-bottom: 2px solid #ddd; /* Added gray border */
+  border-bottom: 2px solid #ddd;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1001;
 }
 
 /* Logo */
 .brand-logo img {
-  height: 80px; /* Increased logo size */
-  width: auto; /* Maintain aspect ratio */
+  height: 80px;
+  width: auto;
 }
 
 /* Navigation Links */
 .nav-links {
   display: flex;
   gap: 25px;
+  align-items: center;
 }
 
 .nav-item {
   text-decoration: none;
-  color: black;
+  color: #333;
   font-size: 16px;
   font-weight: 500;
-  transition: color 0.3s ease-in-out;
+  padding: 8px 12px;
+  border-radius: 0;
+  transition: color 0.3s ease;
+  background-color: transparent;
+  border: none !important;
+  cursor: pointer;
 }
 
 .nav-item:hover {
-  color: #25D366; /* WhatsApp Green */
+  color: #000;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 /* Auth Buttons */
-.auth-buttons {
-  display: flex;
-  gap: 15px;
-}
-
 .login-btn, .signup-btn {
-  background-color: black;
-  color: white;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #000;
+  color: white;
 }
 
-.signup-btn {
-  background-color: #25D366; /* WhatsApp Green */
-}
-
-/* Hover Effect on Auth Buttons */
-.login-btn:hover {
+.login-btn:hover, .signup-btn:hover {
   background-color: #333;
-  transform: scale(1.05);
+  transform: scale(1.03);
+  box-shadow: none;
 }
 
-.signup-btn:hover {
-  background-color: #1da851;
-  transform: scale(1.05);
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+  margin-left: auto;
+  padding: 10px;
+  z-index: 1001;
 }
 
+/* Responsive Nav */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+    padding: 80px 0 20px;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
 
+  .nav-links.mobile-open {
+    display: flex;
+  }
+
+  .nav-item {
+    width: 80%;
+    text-align: center;
+    padding: 15px 20px;
+    font-size: 18px;
+    margin: 5px 0;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .nav-item:first-child {
+    margin-top: 20px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .login-btn, .signup-btn {
+    margin: 10px 0;
+    width: 80%;
+    border-radius: 30px;
+    background-color: #000;
+    color: white;
+    padding: 15px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .login-btn:hover, .signup-btn:hover {
+    background-color: #333;
+  }
+
+  .hero-video {
+    width: 95%;
+    max-height: 240px;
+  }
+
+  .offer-card {
+    width: 90%;
+    padding: 20px;
+  }
+}
 
 /* Footer */
 .footer {
@@ -84,20 +155,17 @@
 }
 
 /* Appointment Section */
-
-/* Center the booking appointment section */
 .appointment-container {
   display: flex;
-  flex-direction: column; /* Stack heading and card */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Full height */
+  min-height: 100vh;
   background-color: #f8f8f8;
   text-align: center;
   padding: 20px;
 }
 
-/* Studio Heading */
 .appointment-heading {
   font-size: 28px;
   font-weight: bold;
@@ -105,7 +173,6 @@
   margin-bottom: 20px;
 }
 
-/* Appointment Card Layout */
 .appointment-card {
   width: 400px;
   padding: 30px;
@@ -115,14 +182,12 @@
   text-align: center;
 }
 
-/* Form Layout */
 .appointment-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* Input Fields */
 .appointment-form input,
 .appointment-form select {
   width: 100%;
@@ -132,9 +197,8 @@
   font-size: 16px;
 }
 
-/* Submit Button */
 .appointment-form button {
-  background: #222;
+  background: #000;
   color: #fff;
   padding: 12px;
   border-radius: 6px;
@@ -144,11 +208,8 @@
 }
 
 .appointment-form button:hover {
-  background: #444;
+  background: #333;
 }
-
-
-/* Services Page Styles */
 
 /* Services Page Styles */
 .services-container {
@@ -159,7 +220,6 @@
   text-align: center;
 }
 
-/* Beauty Point Makeup Studio Heading */
 .studio-heading {
   font-size: 36px;
   font-weight: bold;
@@ -168,7 +228,6 @@
   text-transform: uppercase;
 }
 
-/* Services Header */
 .services-header {
   font-size: 28px;
   font-weight: bold;
@@ -176,7 +235,6 @@
   margin-bottom: 40px;
 }
 
-/* Each Service Category Card */
 .service-category {
   background: #fff;
   border-radius: 12px;
@@ -186,30 +244,26 @@
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Elevate & Highlight on Hover */
 .service-category:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Category Title - Black Underline */
 .category-title {
   font-size: 24px;
   font-weight: bold;
   color: #222;
-  border-bottom: 3px solid black; /* Changed from gray to black */
+  border-bottom: 3px solid black;
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
-/* Service List */
 .service-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Individual Service Item */
 .service-item {
   display: flex;
   justify-content: space-between;
@@ -219,23 +273,21 @@
   transition: background 0.3s ease-in-out;
 }
 
-/* Highlight service item on hover */
 .service-item:hover {
-  background: #ffe6e6;
+  background: #f5f5f5;
 }
 
-/* Service Name */
 .service-name {
   font-weight: 500;
   color: #555;
 }
 
-/* Service Price */
 .service-price {
   font-weight: 600;
   color: #222;
 }
 
+/* Auth Page */
 .auth-container {
   display: flex;
   justify-content: center;
@@ -254,23 +306,24 @@
 }
 
 .title {
-  color: #c89b3c;
+  color: #000;
   text-align: center;
   margin-bottom: 1rem;
 }
 
+/* Special Offers Section */
 .special-offers {
   padding: 60px 20px;
-  background: #fdfdfd;
+  background: #fff;
   position: relative;
 }
 
 .special-offers-title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   text-align: center;
   font-weight: 700;
   margin-bottom: 40px;
-  color: #222;
+  color: #000;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -286,8 +339,8 @@
 
 .nav-arrow {
   background-color: transparent;
-  border: 2px solid #e91e63;
-  color: #e91e63;
+  border: 2px solid #000;
+  color: #000;
   font-size: 24px;
   padding: 8px 16px;
   border-radius: 50%;
@@ -296,7 +349,7 @@
 }
 
 .nav-arrow:hover {
-  background-color: #e91e63;
+  background-color: #000;
   color: white;
 }
 
@@ -304,28 +357,30 @@
   padding-bottom: 40px;
 }
 
-/* === Card Design === */
+/* Card Design */
 .offer-card {
+  width: 85%;
+  max-width: 500px;
+  margin: 0 auto;
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  padding: 30px;
   min-height: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   transition: all 0.4s ease;
 }
 
 .offer-card:hover {
-  background-color: #ffe6f0;
+  background-color: #f5f5f5;
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-/* Title & Price Layout */
 .offer-header {
   display: flex;
   justify-content: space-between;
@@ -336,11 +391,11 @@
 .offer-title {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #e91e63;
+  color: #000;
 }
 
 .price-badge {
-  background: #e91e63;
+  background: #000;
   color: white;
   padding: 4px 10px;
   border-radius: 50px;
@@ -348,7 +403,6 @@
   font-weight: bold;
 }
 
-/* Service List */
 .offer-services {
   list-style: none;
   padding: 0;
@@ -370,4 +424,22 @@
   left: 0;
   color: #4caf50;
   font-size: 0.9rem;
+}
+
+.book-now-btn {
+  background-color: #000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.book-now-btn:hover {
+  background-color: #333;
+  transform: translateY(-2px);
 }

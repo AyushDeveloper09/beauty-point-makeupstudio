@@ -8,7 +8,11 @@ import TestimonialSection from "../components/TestimonialSection";
 const HomePage = () => {
   const navigate = useNavigate();
   const [fadeIn, setFadeIn] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const videoRef = useRef(null);
+
+  const aboutRef = useRef(null);
+  const feedbackRef = useRef(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -24,6 +28,20 @@ const HomePage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+  }, [menuOpen]);
+
+  const scrollToAbout = () => {
+    aboutRef.current?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
+  const scrollToFeedback = () => {
+    feedbackRef.current?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
   return (
     <div>
       {/* Header */}
@@ -31,24 +49,28 @@ const HomePage = () => {
         <div className="brand-logo">
           <img
             src={`${process.env.PUBLIC_URL}/assets/brandlogo.png`}
-            alt="Brand Logo"
+            alt="Beauty Point Makeup Studio"
           />
         </div>
 
-        <nav className="nav-links">
-          <a href="/" className="nav-item">Home</a>
-          <a href="/aboutus" className="nav-item">About Us</a>
-          <a href="/feedback" className="nav-item">Feedback</a>
-        </nav>
+        {/* Hamburger for mobile */}
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </button>
 
-        <div className="auth-buttons">
-          <button className="login-btn" onClick={() => navigate("/login")}>
+        {/* Navigation */}
+        <nav className={`nav-links ${menuOpen ? "mobile-open" : ""}`}>
+          <a href="/" className="nav-item">Home</a>
+          <button className="nav-item" onClick={scrollToAbout}>About Us</button>
+          <button className="nav-item" onClick={scrollToFeedback}>Feedback</button>
+
+          <button className="login-btn" onClick={() => { navigate("/login"); setMenuOpen(false); }}>
             Login
           </button>
-          <button className="signup-btn" onClick={() => navigate("/signup")}>
+          <button className="signup-btn" onClick={() => { navigate("/signup"); setMenuOpen(false); }}>
             Sign Up
           </button>
-        </div>
+        </nav>
       </header>
 
       {/* Hero Section */}
@@ -56,7 +78,7 @@ const HomePage = () => {
         <div className={`hero-text ${fadeIn ? "fade-in" : ""}`}>
           <h1 className="business-name">Beauty Point Makeup Studio</h1>
           <p className="hero-tagline">
-            At Beauty Point Makeup Studio, we don’t just apply makeup—we enhance your confidence, 
+            At Beauty Point Makeup Studio, we don't just apply makeup—we enhance your confidence,
             celebrate your beauty, and ensure that every special moment is picture-perfect.
           </p>
           <div className="hero-buttons">
@@ -66,21 +88,14 @@ const HomePage = () => {
             >
               Chat with Us
             </button>
-            <button
-              className="secondary-btn"
-              onClick={() => navigate("/services")}
-            >
+            <button className="secondary-btn" onClick={() => navigate("/services")}>
               Explore Services
             </button>
-            <button
-              className="primary-btn"
-              onClick={() => navigate("/book-appointment")}
-            >
+            <button className="primary-btn" onClick={() => navigate("/book-appointment")}>
               Book Appointment
             </button>
           </div>
         </div>
-
         <div className="hero-image">
           <img
             src={`${process.env.PUBLIC_URL}/assets/hero.png`}
@@ -108,14 +123,16 @@ const HomePage = () => {
         </video>
       </div>
 
-      {/* Special Offers Section */}
+      {/* Special Offers */}
       <SpecialOffers />
 
       {/* Testimonial Section */}
-      <TestimonialSection />
+      <div ref={feedbackRef}>
+        <TestimonialSection />
+      </div>
 
-      {/* Owner Section */}
-      <div className="owner-section">
+      {/* About / Owner Section */}
+      <div ref={aboutRef} className="owner-section">
         <div className="owner-card">
           <img
             src={`${process.env.PUBLIC_URL}/assets/owner.png`}
@@ -126,7 +143,7 @@ const HomePage = () => {
             <h2>Shalini Kesarwani (Our Founder)</h2>
             <p>
               Our founder, a passionate and skilled makeup artist, believes in
-              bringing out the best in every individual. With years of experience, 
+              bringing out the best in every individual. With years of experience,
               she ensures that each client leaves feeling confident and beautiful.
             </p>
           </div>
